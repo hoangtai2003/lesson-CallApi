@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import {Link} from 'react-router-dom';
 class ProductItem extends Component {
     onDelete = (id) => {
         if (confirm('Bạn có chắc chắn muốn xóa ?')){ //eslint-disable-line
@@ -21,10 +22,11 @@ class ProductItem extends Component {
                 </td>
                 <td>
                     
-                    <button 
-                        type="button" 
-                        className="btn btn-success mr-10">Sửa
-                    </button>
+                    <Link 
+                        to={`/product/${product.id}/edit`} 
+                        className="btn btn-success mr-10"
+                        >Sửa
+                    </Link>
                     <button 
                         type="button" 
                         className="btn btn-warning"
