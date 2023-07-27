@@ -1,5 +1,10 @@
 import { Component } from 'react';
 class ProductItem extends Component {
+    onDelete = (id) => {
+        if (confirm('Bạn có chắc chắn muốn xóa ?')){ //eslint-disable-line
+            this.props.onDelete(id);
+        }
+    }
     render() {
         var {product, index} = this.props;
         var statusName = product.status ? 'Còn hàng' : 'Hết hàng'
@@ -16,10 +21,15 @@ class ProductItem extends Component {
                 </td>
                 <td>
                     
-                    <button type="button" 
-                            className="btn btn-success mr-10">Sửa</button>
-                    <button type="button" 
-                            className="btn btn-warning">Xóa</button>
+                    <button 
+                        type="button" 
+                        className="btn btn-success mr-10">Sửa
+                    </button>
+                    <button 
+                        type="button" 
+                        className="btn btn-warning"
+                        onClick={() => this.onDelete(product.id)}>Xóa
+                    </button>
                 </td>
 
             </tr>
