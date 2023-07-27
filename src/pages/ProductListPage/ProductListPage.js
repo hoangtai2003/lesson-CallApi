@@ -4,6 +4,7 @@ import ProductItem from '../../components/ProductItem/ProductItem';
 import {connect } from 'react-redux';
 import callApi from './../../utils/ApiCaller';
 import { Link } from 'react-router-dom';
+import {actFetchProductsRequest} from './../../actions/index';
 class ProductListPage extends Component {
     constructor(props){
         super(props);
@@ -12,11 +13,7 @@ class ProductListPage extends Component {
         };
     }
     componentDidMount(){
-        callApi('products', 'GET', null).then(res => {
-            this.setState({
-                products: res.data
-            });
-        });
+        this.props.fetchAllProducts();
     }
     onDelete = (id) => {
         var {products} = this.state;
@@ -75,4 +72,11 @@ const mapStateToProps = (state) => {
         products: state.products
     }
 }
-export default connect(mapStateToProps, null)(ProductListPage);
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchAllProducts: () => {
+            dispatch(actFetchProductsRequest());
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListPage);
