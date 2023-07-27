@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import callApi from '../../utils/ApiCaller';
 import { Link } from 'react-router-dom';
+import {actAddProductsRequest} from '../../actions/index';
+import { connect } from 'react-redux';
 
 class ProductActionPage extends Component {
     constructor (props){
@@ -24,6 +26,12 @@ class ProductActionPage extends Component {
         event.preventDefault();
         var {id, txtName, txtPrice, chkbStatus} = this.state;
         var {history} = this.props;
+        var product = {
+                id: id,
+                name: txtName,
+                price: txtPrice,
+                status: chkbStatus
+        };
         if (id) { // update
             callApi(`products/${id}`, 'PUT', {
                 name: txtName,
@@ -33,13 +41,8 @@ class ProductActionPage extends Component {
                 history.goBack();
             })
         } else { // add
-            callApi('product', 'POST', {
-                name: txtName,
-                price: txtPrice,
-                status: chkbStatus
-            }).then(res => {
-                history.goBack();
-            })
+            this.props.onAddProduct(product);
+            history.goBack();
         }
     }
     componentDidMount () {
@@ -106,5 +109,11 @@ class ProductActionPage extends Component {
         );
     }
 }
-
-export default ProductActionPage;
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddProduct: (product) => {
+            dispatch(actAddProductsRequest(product))
+        }
+    }
+}
+export default connect(null, mapDispatchToProps) (ProductActionPage);

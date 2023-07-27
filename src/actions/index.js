@@ -16,13 +16,27 @@ export const actFetchProducts = (products) => {
 export const actDeleteProductsRequest = (id) => {
     return (dispatch) =>  {
         return callApi(`products/${id}`, 'DELETE', null).then(res => {
-            dispatch(actDeleteProducts(id))
+            dispatch(actDeleteProduct(id))
         });
     };
 }
-export const actDeleteProducts = (id) => {
+
+export const actDeleteProduct = (id) => {
     return {
         type: Types.DELETE_PRODUCT,
         id
+    }
+}
+export const actAddProductsRequest = (product) => {
+    return (dispatch) =>  {
+        return callApi('products', 'POST', product).then(res => {
+            dispatch(actAddProduct(res.data))
+        });
+    };
+}
+export const actAddProduct = (product) => {
+    return {
+        type: Types.ADD_PRODUCT,
+        product
     }
 }
