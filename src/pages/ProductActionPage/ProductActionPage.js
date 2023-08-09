@@ -12,17 +12,17 @@ class ProductActionPage extends Component {
             txtName: '',
             txtPrice: '',
             chkbStatus: ''
-        }
+        };
     }
     onChange = (event) => {
         var target = event.target;
         var name = target.name;
-        var value = target.type === "checkbox" ? target.checked : target.value
+        var value = target.type === "checkbox" ? target.checked : target.value;
         this.setState ({
-            [value]: name
+            [name]: value
         })
     }
-    onSubmit = (event) => {
+    onSave = (event) => {
         event.preventDefault();
         var {id, txtName, txtPrice, chkbStatus} = this.state;
         var {history} = this.props;
@@ -61,7 +61,7 @@ class ProductActionPage extends Component {
         }
     }
     render() {
-        var{txtName, txtPrice, chkbStatus} = this.props;
+        var{txtName, txtPrice, chkbStatus} = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <form onSubmit={this.onSave}>

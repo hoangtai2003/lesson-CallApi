@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React,{ Component } from 'react';
 import './App.css';
 import Menu from './components/Menu/Menu';
 import routes from './routes';
@@ -13,7 +13,6 @@ class App extends Component {
                         <div className="row">
                             {this.showContensMenus(routes)}
                         </div>
-                        
                     </div>
                 </div>
             </Router>

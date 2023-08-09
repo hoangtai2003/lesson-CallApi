@@ -36,12 +36,12 @@ class Menu extends Component {
             <div className="navbar navbar-default">
                 <a className="navbar-brand">CALL API</a>
                 <ul className="nav navbar-nav">
-                    {this.showMenu(menus)}
+                    {this.showMenus(menus)}
                 </ul>
             </div>
         );
     }
-    showMenu = (menus) => {
+    showMenus = (menus) => {
         var result = null;
         if (menus?.length > 0) {
             result = menus.map ((menu, index) => {
@@ -52,8 +52,8 @@ class Menu extends Component {
                         to = {menu.to}
                         activeOnlyWhenExact={menu.exact}
                     />
-                )
-            })
+                );
+            });
         }
         return result;
     }
